@@ -1,0 +1,14 @@
+CREATE DATABASE testDb;
+CREATE TABLE person (
+    id bigserial not null,
+    name varchar(100) not null,
+    phone char(25),
+    age integer not null,
+    email char(40)
+);
+CREATE TABLE profile (
+  id bigserial not null,
+  login char(100) not null,
+  password bigint not null,
+  isadmin boolean not null
+);
