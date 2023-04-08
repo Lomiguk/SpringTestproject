@@ -100,7 +100,13 @@
       <artifactId>postgresql</artifactId>
       <version>42.6.0</version>
     </dependency>
-
+    <!-- JDBC Template -->
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>SpringApp_yt</finalName>

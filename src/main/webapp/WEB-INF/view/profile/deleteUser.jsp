@@ -1,4 +1,4 @@
-<%@ page import="com.lomiguk.springapp_l.model.Profile" %><%--
+<%@ page import="com.lomiguk.springapp.model.Profile" %><%--
   Created by IntelliJ IDEA.
   User: Denis
   Date: 02.04.2023
@@ -25,10 +25,10 @@
     <!-- Тут вместо c:choose лучше наверное было бы уйти в Java блок и переменную зафигачить -->
     <c:forEach items="${profiles}" var="profileVar">
         <p>
-             ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.admin == true}">
+             ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.isadmin == true}">
                                                                     admin
                                                                </c:when>
-                                                               <c:when test="${profileVar.admin == false}">
+                                                               <c:when test="${profileVar.isadmin == false}">
                                                                     user
                                                                </c:when></c:choose>)
 

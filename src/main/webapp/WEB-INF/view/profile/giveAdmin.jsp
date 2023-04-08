@@ -25,15 +25,15 @@
   <!-- Тут вместо c:choose лучше наверное было бы уйти в Java блок и переменную зафигачить -->
   <c:forEach items="${profiles}" var="profileVar">
     <p>
-        ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.admin == true}">
+        ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.isadmin == true}">
                                                             admin
                                                           </c:when>
-                                                          <c:when test="${profileVar.admin == false}">
+                                                          <c:when test="${profileVar.isadmin == false}">
                                                             user
                                                           </c:when></c:choose>)
         <form action="${pageContext.request.contextPath}/profile/to_admin" method="post">
             <input type="hidden" value="${profileVar.id}" name="userId" id="userId">
-            <input type="submit" value="<c:choose><c:when test="${profileVar.admin == true}">To user</c:when><c:when test="${profileVar.admin == false}">To admin</c:when></c:choose>">
+            <input type="submit" value="<c:choose><c:when test="${profileVar.isadmin == true}">To user</c:when><c:when test="${profileVar.isadmin == false}">To admin</c:when></c:choose>">
         </form>
     </p>
   </c:forEach>
