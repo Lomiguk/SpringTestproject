@@ -1,10 +1,10 @@
 package com.lomiguk.springapp.repository.dao;
 
-import com.lomiguk.springapp.model.Profile;
+import com.lomiguk.springapp.model.priofile.Profile;
 import com.lomiguk.springapp.repository.ConnectionFactory;
+import com.lomiguk.springapp.repository.rowMapper.LoginProfileRowMapper;
 import com.lomiguk.springapp.tool.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -38,16 +38,14 @@ public class ProfileDAO {
     public void register(Profile profile) {
         jdbcTemplate.update(ADD_PROFILE,
                             profile.getLogin(),
-                            PasswordUtils.getHash(profile.getPassword()));
+                            PasswordUtils.getHash(new String(profile.getPassword())));
     }
 
     public Profile getByLoginPassword(String login, String actualPassword) {
-        Profile profile = jdbcTemplate.query(CHECK_AUTHORISED_QUERY,
-                                             new BeanPropertyRowMapper<>(Profile.class),
-                                             login,
-                                             PasswordUtils.getHash(actualPassword))
-                                      .stream().findAny().orElse(null);
-        return profile;
+        return jdbcTemplate.queryForObject(CHECK_AUTHORISED_QUERY,
+                                           new LoginProfileRowMapper(),
+                                           login,
+                                           PasswordUtils.getHash(actualPassword));
     }
 
     public void changePassword(long id, String newPassword) {
@@ -59,7 +57,7 @@ public class ProfileDAO {
     public Collection<Profile> getProfileByLoginFragment(String login) {
         login = "%"+login+"%";
         return jdbcTemplate.query(GET_PROFILES_BY_LOGIN_PART,
-                                  new BeanPropertyRowMapper<>(Profile.class), login);
+                new LoginProfileRowMapper(), login);
     }
 
     public void getAdminPermission(Long id) {

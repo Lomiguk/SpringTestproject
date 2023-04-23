@@ -1,19 +1,15 @@
 package com.lomiguk.springapp.filter.person;
 
 import com.lomiguk.springapp.tool.filter.FilterChecker;
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@WebFilter("/person/add")
-public class PersonAddFilter implements Filter {
-
+@Component
+@WebFilter("/person/admin/*")
+public class AdminPersonFilter implements Filter{
     public static final String PROFILE_LOGIN_PATH = "/profile/login";
 
     @Override

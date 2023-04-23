@@ -1,4 +1,4 @@
-package com.lomiguk.springapp.model;
+package com.lomiguk.springapp.model.priofile;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -17,6 +17,10 @@ public class Profile {
     @Size(min = 5, max = 15, message = "Login size should be 5 – 15")
     private String login;
     @NotEmpty
-    private String password;
-    private boolean isAdmin;
+    private char[] password;
+    private boolean admin;
+
+    public boolean getIsAdmin() {
+        return admin;
+    }
 }

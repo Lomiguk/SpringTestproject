@@ -28,8 +28,9 @@
     <a href="${pageContext.request.contextPath}/profile/password">change password</a>
     <c:if test="${sessionScope.getOrDefault('isAdmin', false) == true}">
         <h3>ACTIONS</h3>
-        <a href="${pageContext.request.contextPath}/profile/get_permission">New admin</a> |
-        <a href="${pageContext.request.contextPath}/profile/delete_user">Delete users</a>
+        <a href="${pageContext.request.contextPath}/profile/admin/prof/get_permission">
+            New admin</a> |
+        <a href="${pageContext.request.contextPath}/profile/admin/prof/delete_user">Delete users</a>
     </c:if>
 </body>
 </html>

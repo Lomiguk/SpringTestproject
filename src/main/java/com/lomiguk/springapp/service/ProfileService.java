@@ -1,6 +1,6 @@
 package com.lomiguk.springapp.service;
 
-import com.lomiguk.springapp.model.Profile;
+import com.lomiguk.springapp.model.priofile.Profile;
 import com.lomiguk.springapp.repository.dao.ProfileDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

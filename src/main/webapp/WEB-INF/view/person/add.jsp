@@ -31,7 +31,7 @@
         <a href="${pageContext.request.contextPath}/profile">Profile</a>
         <hr/>
     </header>
-    <form:form method="post" action="${pageContext.request.contextPath}/person/add" commandName = "person" modelAttribute="person">
+    <form:form method="post" action="${pageContext.request.contextPath}/person/admin/prs/add" commandName = "person" modelAttribute="person">
         <form:errors path = "*" cssClass = "errorblock" element = "div" />
 
         <label for="name">Name: </label>

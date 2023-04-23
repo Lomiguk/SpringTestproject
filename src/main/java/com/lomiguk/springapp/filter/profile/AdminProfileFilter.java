@@ -1,19 +1,15 @@
 package com.lomiguk.springapp.filter.profile;
 
 import com.lomiguk.springapp.tool.filter.FilterChecker;
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@WebFilter("/profile")
-public class ProfileFilter implements Filter {
-
+@Component
+@WebFilter("/profile/admin/*")
+public class AdminProfileFilter implements Filter{
     public static final String PROFILE_LOGIN_PATH = "/profile/login";
 
     @Override
@@ -27,6 +23,7 @@ public class ProfileFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         new FilterChecker(servletRequest, servletResponse, filterChain)
                 .addCondition("isAuthorised")
+                .addCondition("isAdmin")
                 .checkForPath(PROFILE_LOGIN_PATH);
     }
 

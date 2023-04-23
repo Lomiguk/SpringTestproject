@@ -12,7 +12,7 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/profile/login" method="post">
-    <p>Register</p>
+    <p>Login</p>
     <input type="text" name="login"> <br/>
     <p>Password</p>
     <input type="password" name="password">

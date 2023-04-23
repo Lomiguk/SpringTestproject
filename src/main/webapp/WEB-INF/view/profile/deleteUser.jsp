@@ -1,4 +1,4 @@
-<%@ page import="com.lomiguk.springapp.model.Profile" %><%--
+<%@ page import="com.lomiguk.springapp.model.priofile.Profile" %><%--
   Created by IntelliJ IDEA.
   User: Denis
   Date: 02.04.2023
@@ -17,22 +17,22 @@
         <a href="${pageContext.request.contextPath}/profile">Profile</a>
         <hr/>
     </header>
-    <form action="${pageContext.request.contextPath}/profile/get_profiles_for_delete" method="post">
-        <label for="userLogin">user login</label>
+    <form action="${pageContext.request.contextPath}/profile/admin/prof/get_profiles_for_delete" method="post">
+        <label for="userLogin">User login</label>
         <input type="text" name="userLogin" id="userLogin"/>
-        <input type="submit">
+        <input type="submit" value="поиск">
     </form>
     <!-- Тут вместо c:choose лучше наверное было бы уйти в Java блок и переменную зафигачить -->
     <c:forEach items="${profiles}" var="profileVar">
         <p>
-             ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.isadmin == true}">
+             ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.isAdmin == true}">
                                                                     admin
                                                                </c:when>
-                                                               <c:when test="${profileVar.isadmin == false}">
+                                                               <c:when test="${profileVar.isAdmin == false}">
                                                                     user
                                                                </c:when></c:choose>)
 
-            <form action="${pageContext.request.contextPath}/profile/delete" method="post">
+            <form action="${pageContext.request.contextPath}/profile/admin/prof/delete" method="post">
                 <input type="hidden" value="${profileVar.id}" name="userId" id="userId">
                 <input type="submit" value="delete">
             </form>

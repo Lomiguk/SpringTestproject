@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>New admin</title>
+    <title>Change status</title>
 </head>
 <body>
     <header>
@@ -17,23 +17,23 @@
         <a href="${pageContext.request.contextPath}/profile">Profile</a>
         <hr/>
     </header>
-  <form action="${pageContext.request.contextPath}/profile/get_profiles" method="post">
-    <label for="userLogin">user login</label>
+  <form action="${pageContext.request.contextPath}/profile/admin/prof/get_profiles" method="post">
+    <label for="userLogin">User login</label>
     <input type="text" name="userLogin" id="userLogin"/>
-    <input type="submit">
+    <input type="submit" value="поискфтшьу пщ">
   </form>
   <!-- Тут вместо c:choose лучше наверное было бы уйти в Java блок и переменную зафигачить -->
   <c:forEach items="${profiles}" var="profileVar">
     <p>
-        ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.isadmin == true}">
+        ${profileVar.id} ${profileVar.login} (<c:choose>  <c:when test="${profileVar.admin == true}">
                                                             admin
                                                           </c:when>
-                                                          <c:when test="${profileVar.isadmin == false}">
+                                                          <c:when test="${profileVar.admin == false}">
                                                             user
                                                           </c:when></c:choose>)
-        <form action="${pageContext.request.contextPath}/profile/to_admin" method="post">
+        <form action="${pageContext.request.contextPath}/profile/admin/prof/to_admin" method="post">
             <input type="hidden" value="${profileVar.id}" name="userId" id="userId">
-            <input type="submit" value="<c:choose><c:when test="${profileVar.isadmin == true}">To user</c:when><c:when test="${profileVar.isadmin == false}">To admin</c:when></c:choose>">
+            <input type="submit" value="<c:choose><c:when test="${profileVar.admin == true}">To user</c:when><c:when test="${profileVar.admin == false}">To admin</c:when></c:choose>">
         </form>
     </p>
   </c:forEach>

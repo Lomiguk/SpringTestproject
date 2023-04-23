@@ -18,7 +18,7 @@
         <a href="${pageContext.request.contextPath}/profile">Profile</a>
         <hr/>
     </header>
-    <form:form method="post" action="${pageContext.request.contextPath}/person/${person.id}" modelAttribute="person">
+    <form:form method="post" action="${pageContext.request.contextPath}/person/admin/prs/${person.id}" modelAttribute="person">
         <input type="hidden" name="_method" value="patch">
         <label for="name">Name: </label>
         <form:input type="text" id="name" path="name" value="${person.name}"/> <br/>

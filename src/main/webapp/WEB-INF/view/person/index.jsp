@@ -28,7 +28,7 @@
     </c:forEach>
     <br/>
     <hr/>
-    <a href="${pageContext.request.contextPath}/person/add">Add person</a>
+    <a href="${pageContext.request.contextPath}/person/admin/prs/add">Add person</a>
     <a href="${pageContext.request.contextPath}/profile">Profile</a>
 </body>
 </html>

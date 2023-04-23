@@ -25,8 +25,8 @@
     <p>email: ${person.email}</p>
     <c:if test="${sessionScope.getOrDefault('isAdmin', false) == true}">
         <hr/>
-        <a href="${pageContext.request.contextPath}/person/${person.id}/edit">Edit</a>
-        <form:form method="post" action="${pageContext.request.contextPath}/person/${person.id}" modelAttribute="person">
+        <a href="${pageContext.request.contextPath}/person/admin/prs/${person.id}/edit">Edit</a>
+        <form:form method="post" action="${pageContext.request.contextPath}/person/admin/prs/${person.id}" modelAttribute="person">
             <input type="hidden" name="_method" value="delete">
             <input type="submit" value="Delete">
         </form:form>
