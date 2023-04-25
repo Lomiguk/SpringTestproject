@@ -5,6 +5,7 @@ import com.lomiguk.springapp.repository.ConnectionFactory;
 import com.lomiguk.springapp.repository.rowMapper.LoginProfileRowMapper;
 import com.lomiguk.springapp.tool.PasswordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -42,10 +43,14 @@ public class ProfileDAO {
     }
 
     public Profile getByLoginPassword(String login, String actualPassword) {
-        return jdbcTemplate.queryForObject(CHECK_AUTHORISED_QUERY,
+        try{
+            return jdbcTemplate.queryForObject(CHECK_AUTHORISED_QUERY,
                                            new LoginProfileRowMapper(),
                                            login,
                                            PasswordUtils.getHash(actualPassword));
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     public void changePassword(long id, String newPassword) {
@@ -57,7 +62,7 @@ public class ProfileDAO {
     public Collection<Profile> getProfileByLoginFragment(String login) {
         login = "%"+login+"%";
         return jdbcTemplate.query(GET_PROFILES_BY_LOGIN_PART,
-                new LoginProfileRowMapper(), login);
+                                  new LoginProfileRowMapper(), login);
     }
 
     public void getAdminPermission(Long id) {

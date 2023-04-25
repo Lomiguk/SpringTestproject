@@ -17,7 +17,7 @@
         <a href="${pageContext.request.contextPath}/profile">Profile</a>
         <hr/>
     </header>
-    <c:if test="${sessionScope.isAuthorised}">
+    <c:if test="${sessionScope.isAuthorised}">s
         Hello <c:if test="${sessionScope.isAdmin}">admin</c:if> ${sessionScope.userName}!
     </c:if>
     <br/>
