@@ -28,9 +28,6 @@ public class ProfileDAO {
     private ConnectionFactory connectionFactory;
     private final JdbcTemplate jdbcTemplate;
 
-    /*public ProfileDAO(ConnectionFactory connectionFactory) {
-        this.connectionFactory = connectionFactory;
-    }*/
     @Autowired
     public ProfileDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

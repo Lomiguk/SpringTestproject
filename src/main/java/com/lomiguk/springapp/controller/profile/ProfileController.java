@@ -1,5 +1,6 @@
 package com.lomiguk.springapp.controller.profile;
 
+import com.lomiguk.springapp.exception.QueryGetProfileException;
 import com.lomiguk.springapp.model.priofile.Profile;
 import com.lomiguk.springapp.model.priofile.dto.ProfileLoginDto;
 import com.lomiguk.springapp.model.priofile.dto.ProfileRegisterDto;
@@ -10,10 +11,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
@@ -55,11 +53,13 @@ public class ProfileController {
     }
 
     @PostMapping("/password")
-    public String passwordChange(HttpServletRequest request) {
+    public String passwordChange(HttpServletRequest request,
+                                 @SessionAttribute("passwordChangeErrors") Set<String> errors) {
         HttpSession session = request.getSession();
-        Set<String> errors = (Set<String>) session.getAttribute("passwordChangeErrors");
+        //Set<String> errors = (Set<String>) session.getAttribute("passwordChangeErrors");
         String login = (String) session.getAttribute("userName");
         if (login == null || login.isEmpty()) {
+            errors.clear();
             errors.add("Empty login");
             session.setAttribute("passwordChangeErrors", errors);
             return "redirect: ../login";
@@ -68,6 +68,7 @@ public class ProfileController {
         try {
             Profile profile = profileService.getByLoginPassword(login, actualPassword);
             if (profile == null) {
+                errors.clear();
                 errors.add("Missing profile");
                 session.setAttribute("passwordChangeErrors", errors);
                 return "redirect: ../password";
@@ -76,6 +77,7 @@ public class ProfileController {
             profileService.changePassword(profile.getId(), newPassword);
         } catch (SQLException | NamingException e) {
             LOGGER.log(Level.WARNING, "password change exception", e);
+            errors.clear();
             errors.add("password change exception");
             session.setAttribute("passwordChangeErrors", errors);
             return "redirect: ../password";
@@ -135,21 +137,14 @@ public class ProfileController {
                     profileLoginDto.getLogin().trim(),
                     profileLoginDto.getPassword().trim());
             if (authorisedProfile == null) {
-                bindingResult.rejectValue("login",
-                        "Account doesn't exist",
-                        "Account doesn't exist!");
-                LOGGER.log(Level.WARNING, "wrong profile data");
-                return "profile/login";
+                throw new QueryGetProfileException("get null profile");
             }
             HttpSession session = request.getSession();
             session.setAttribute("isAuthorised", true);
             session.setAttribute("userName", authorisedProfile.getLogin().trim());
             session.setAttribute("isAdmin", authorisedProfile.isAdmin());
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException | QueryGetProfileException e) {
             bindingResult.rejectValue("login",
-                    "Wrong login or password",
-                    "Wrong login or password!");
-            bindingResult.rejectValue("password",
                     "Wrong login or password",
                     "Wrong login or password!");
             LOGGER.log(Level.WARNING, "login error", e);

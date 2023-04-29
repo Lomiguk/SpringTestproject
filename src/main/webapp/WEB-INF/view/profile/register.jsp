@@ -12,7 +12,7 @@
 <head>
     <title>Register</title>
     <!-- стиль не работает -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
+    <link rel="stylesheet" href="resources/style.css"/>
 </head>
 <body>
 <form:form method="post"

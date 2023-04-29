@@ -9,10 +9,9 @@ import java.sql.SQLException;
 public class LoginProfileRowMapper implements RowMapper<Profile> {
     @Override
     public Profile mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return rs.next() ? Profile.builder()
-                                  .id(rs.getLong("id"))
-                                  .login(rs.getString("login"))
-                                  .admin(rs.getBoolean("isAdmin"))
-                                  .build() : null;
+        return Profile.builder()
+                .id(rs.getLong("id"))
+                .login(rs.getString("login"))
+                .admin(rs.getBoolean("isAdmin")).build();
     }
 }
