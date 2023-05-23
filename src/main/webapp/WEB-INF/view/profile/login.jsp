@@ -12,7 +12,7 @@
 <head>
     <title>Login</title>
     <!-- стиль не работает -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css">
+    <link href="<c:url value="/static/style.css" />" rel="stylesheet">
 </head>
 <body>
 <form:form method="post"

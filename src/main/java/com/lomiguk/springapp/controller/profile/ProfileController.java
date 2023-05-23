@@ -56,7 +56,7 @@ public class ProfileController {
     public String passwordChange(HttpServletRequest request,
                                  @SessionAttribute("passwordChangeErrors") Set<String> errors) {
         HttpSession session = request.getSession();
-        //Set<String> errors = (Set<String>) session.getAttribute("passwordChangeErrors");
+        // Set<String> errors = (Set<String>) session.getAttribute("passwordChangeErrors");
         String login = (String) session.getAttribute("userName");
         if (login == null || login.isEmpty()) {
             errors.clear();

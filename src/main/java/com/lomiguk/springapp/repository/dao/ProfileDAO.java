@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -33,12 +34,14 @@ public class ProfileDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Transactional
     public void register(Profile profile) {
         jdbcTemplate.update(ADD_PROFILE,
                             profile.getLogin(),
                             PasswordUtils.getHash(new String(profile.getPassword())));
     }
 
+    @Transactional
     public Profile getByLoginPassword(String login, String actualPassword) {
         try{
             return jdbcTemplate.queryForObject(CHECK_AUTHORISED_QUERY,
@@ -50,22 +53,26 @@ public class ProfileDAO {
         }
     }
 
+    @Transactional
     public void changePassword(long id, String newPassword) {
         jdbcTemplate.update(CHANGE_PASSWORD,
                             PasswordUtils.getHash(newPassword),
                             id);
     }
 
+    @Transactional
     public Collection<Profile> getProfileByLoginFragment(String login) {
         login = "%"+login+"%";
         return jdbcTemplate.query(GET_PROFILES_BY_LOGIN_PART,
                                   new LoginProfileRowMapper(), login);
     }
 
+    @Transactional
     public void getAdminPermission(Long id) {
         jdbcTemplate.update(GET_ADMIN_PERMISSION_BY_ID, id);
     }
 
+    @Transactional
     public void delete(Long id) {
         jdbcTemplate.update(DELETE_BY_ID, id);
     }

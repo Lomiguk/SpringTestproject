@@ -5,7 +5,7 @@
   Time: 12:31
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ page contentType="text/html;charset=UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -20,7 +20,7 @@
   <form action="${pageContext.request.contextPath}/profile/admin/prof/get_profiles" method="post">
     <label for="userLogin">User login</label>
     <input type="text" name="userLogin" id="userLogin"/>
-    <input type="submit" value="поискфтшьу пщ">
+    <input type="submit" value="поиск">
   </form>
   <!-- Тут вместо c:choose лучше наверное было бы уйти в Java блок и переменную зафигачить -->
   <c:forEach items="${profiles}" var="profileVar">

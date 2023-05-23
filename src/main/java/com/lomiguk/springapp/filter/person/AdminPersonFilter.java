@@ -1,7 +1,12 @@
 package com.lomiguk.springapp.filter.person;
 
 import com.lomiguk.springapp.tool.filter.FilterChecker;
-import jakarta.servlet.*;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import org.springframework.stereotype.Component;
 

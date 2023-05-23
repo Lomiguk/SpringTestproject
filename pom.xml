@@ -9,9 +9,15 @@
   <url>http://maven.apache.org</url>
   <properties>
     <spring.version>6.0.6</spring.version>
+    <spring.boot.version>3.0.6</spring.boot.version>
     <maven.compiler.source>19</maven.compiler.source>
     <maven.compiler.target>19</maven.compiler.target>
   </properties>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.0.6</version>
+  </parent>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -19,6 +25,8 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+
     <!-- Servlet -->
     <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
     <dependency>
